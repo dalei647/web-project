@@ -33,4 +33,11 @@ public class DeptController {
         deptService.deleteById(id);
         return Result.success();
     }
+
+    @PostMapping("/depts")
+    public Result add(@RequestBody Dept dept){
+        System.out.println("添加部门: " + dept);
+        deptService.insertByName(dept);
+        return Result.success();
+    }
 }

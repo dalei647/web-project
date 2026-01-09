@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Data
+@Data    //自动为bean类，不需要手动设置
 @NoArgsConstructor
 @AllArgsConstructor
 public class Dept {
