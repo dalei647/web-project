@@ -11,6 +11,7 @@ import java.util.List;
 /**
  * 部门管理控制器
  */
+@RequestMapping("/depts")
 @RestController
 public class DeptController {
 
@@ -21,34 +22,34 @@ public class DeptController {
      * 查询部门列表
      */
 //    @RequestMapping(value = "/depts", method = RequestMethod.GET)
-    @GetMapping("/depts")
+    @GetMapping
     public Result list(){
         List<Dept> deptList = deptService.findAll();
         return Result.success(deptList);
     }
 
-    @DeleteMapping("/depts")
+    @DeleteMapping
     public Result delete(Integer id){
         System.out.println("根据id删除部门, id=" + id);
         deptService.deleteById(id);
         return Result.success();
     }
 
-    @PostMapping("/depts")
+    @PostMapping
     public Result add(@RequestBody Dept dept){
         System.out.println("添加部门: " + dept);
         deptService.insertByName(dept);
         return Result.success();
     }
 
-    @GetMapping("/depts/{id}")
+    @GetMapping("/{id}")
     public Result getInfo(@PathVariable Integer id){
         System.out.println("根据ID查询部门， id=" + id);
         Dept dept = deptService.findById(id);
         return Result.success(dept);
     }
 
-    @PutMapping ("/depts")
+    @PutMapping
     public Result updateInfo(@RequestBody Dept dept){
         System.out.println("根据id修改部门， id = " + dept.getId());
         deptService.updateInfoById(dept);
