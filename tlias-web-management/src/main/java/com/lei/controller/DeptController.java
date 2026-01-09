@@ -40,4 +40,18 @@ public class DeptController {
         deptService.insertByName(dept);
         return Result.success();
     }
+
+    @GetMapping("/depts/{id}")
+    public Result getInfo(@PathVariable Integer id){
+        System.out.println("根据ID查询部门， id=" + id);
+        Dept dept = deptService.findById(id);
+        return Result.success(dept);
+    }
+
+    @PutMapping ("/depts")
+    public Result updateInfo(@RequestBody Dept dept){
+        System.out.println("根据id修改部门， id = " + dept.getId());
+        deptService.updateInfoById(dept);
+        return Result.success();
+    }
 }
