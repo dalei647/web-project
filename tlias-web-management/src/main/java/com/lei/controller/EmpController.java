@@ -1,6 +1,7 @@
 package com.lei.controller;
 
 import com.lei.pojo.Emp;
+import com.lei.pojo.EmpQueryParam;
 import com.lei.pojo.PageResult;
 import com.lei.pojo.Result;
 import com.lei.service.EmpService;
@@ -23,8 +24,9 @@ public class EmpController {
 
 
     @GetMapping
-    public Result page(Integer page, Integer pageSize){
-        PageResult<Emp> pageResult = empService.page(page, pageSize);
+    public Result page(EmpQueryParam empQueryParam) {
+        log.info("查询请求参数： {}", empQueryParam);
+        PageResult pageResult = empService.page(empQueryParam);
         return Result.success(pageResult);
     }
 

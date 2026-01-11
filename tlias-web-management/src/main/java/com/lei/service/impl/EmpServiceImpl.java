@@ -1,7 +1,10 @@
 package com.lei.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.lei.mapper.EmpMapper;
 import com.lei.pojo.Emp;
+import com.lei.pojo.EmpQueryParam;
 import com.lei.pojo.PageResult;
 import com.lei.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +21,24 @@ public class EmpServiceImpl implements EmpService {
     @Autowired
     private EmpMapper empMapper;
 
-    @Override
-    public PageResult<Emp> page(Integer page, Integer pageSize) {
-        Long total = empMapper.count();
+    /*@Override
+    public PageResult page(Integer page, Integer pageSize, String name, Integer gender, LocalDate begin, LocalDate end) {
+        //1. 设置PageHelper分页参数
+        PageHelper.startPage(page, pageSize);
+        //2. 执行查询
+        List<Emp> empList = empMapper.list(name, gender, begin, end);
+        //3. 封装分页结果
+        Page<Emp> p = (Page<Emp>) empList;
+        return new PageResult(p.getTotal(), p.getResult());
+    }*/
 
-        Integer start = (page-1) * pageSize;
-        List<Emp> rows = empMapper.list(start, pageSize);
-
-        return new PageResult<Emp>(total, rows);
+    public PageResult page(EmpQueryParam empQueryParam) {
+        //1. 设置PageHelper分页参数
+        PageHelper.startPage(empQueryParam.getPage(), empQueryParam.getPageSize());
+        //2. 执行查询
+        List<Emp> empList = empMapper.list(empQueryParam);
+        //3. 封装分页结果
+        Page<Emp> p = (Page<Emp>)empList;
+        return new PageResult(p.getTotal(), p.getResult());
     }
 }
