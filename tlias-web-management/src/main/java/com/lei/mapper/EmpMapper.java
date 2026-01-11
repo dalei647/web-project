@@ -2,7 +2,9 @@ package com.lei.mapper;
 
 import com.lei.pojo.Emp;
 import com.lei.pojo.EmpQueryParam;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -20,4 +22,12 @@ public interface EmpMapper {
      * 根据查询条件查询员工
      */
     List<Emp> list(EmpQueryParam empQueryParam);
+
+    /**
+     * 新增员工数据
+     */
+    @Options(useGeneratedKeys = true, keyProperty = "id") //获取到生成的主键--主键返回
+    @Insert("insert into emp(username, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time) " +
+            "values (#{username},#{name},#{gender},#{phone},#{job},#{salary},#{image},#{entryDate},#{deptId},#{createTime},#{updateTime})")
+    void insert(Emp emp);
 }

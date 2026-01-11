@@ -10,4 +10,6 @@ public interface EmpService {
      */
     //PageResult page(Integer page, Integer pageSize, String name, Integer gender, LocalDate begin, LocalDate end);
     PageResult page(EmpQueryParam empQueryParam);
+
+    void save(Emp emp);
 }
