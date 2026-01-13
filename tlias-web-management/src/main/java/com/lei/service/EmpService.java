@@ -4,6 +4,8 @@ import com.lei.pojo.Emp;
 import com.lei.pojo.EmpQueryParam;
 import com.lei.pojo.PageResult;
 
+import java.util.List;
+
 public interface EmpService {
     /**
      * 分页查询
@@ -13,5 +15,9 @@ public interface EmpService {
 
     void save(Emp emp);
 
-    void delete(Integer[] ids);
+    void deleteByIds(List<Integer> ids);
+
+    Emp getInfo(Integer id);
+
+    void update(Emp emp);
 }
