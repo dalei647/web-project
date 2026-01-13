@@ -38,4 +38,11 @@ public class EmpController {
         return Result.success();
     }
 
+    @DeleteMapping
+    public Result delete(Integer[] ids){
+        log.info("删除员工id：{}", ids);
+        empService.delete(ids);
+        return Result.success();
+    }
+
 }

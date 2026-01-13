@@ -60,8 +60,6 @@ public class EmpServiceImpl implements EmpService {
             //2.保存员工基本信息
             empMapper.insert(emp);
 
-            int i = 1 / 0;
-
             //3. 保存员工的工作经历信息 - 批量
             Integer empId = emp.getId();
             List<EmpExpr> exprList = emp.getExprList();
@@ -74,5 +72,13 @@ public class EmpServiceImpl implements EmpService {
             EmpLog empLog = new EmpLog(null, LocalDateTime.now(), emp.toString());
             empLogService.insertLog(empLog);
         }
+    }
+
+    @Transactional(rollbackFor = {Exception.class})
+    @Override
+    public void delete(Integer[] ids) {
+        empMapper.deleteEmpById(ids);
+
+        empMapper.deleteEmpExprById(ids);
     }
 }

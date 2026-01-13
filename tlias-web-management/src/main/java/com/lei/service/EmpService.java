@@ -12,4 +12,6 @@ public interface EmpService {
     PageResult page(EmpQueryParam empQueryParam);
 
     void save(Emp emp);
+
+    void delete(Integer[] ids);
 }
